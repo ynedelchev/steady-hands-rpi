@@ -5,7 +5,8 @@ import RPi.GPIO as GPIO
 import time
 from gpiozero import LED    # sudo apt install python3-gpiozero
 
-# Забележка: Крачета 3 и 5 винаги отчитат напрежение (1), когато се използват като входни (IN).
+# Забележка: Крачета 3 (GPIO2) и 5 (GPIO3) винаги отчитат напрежение (True, 1), когато се използват като входни (IN) и не
+# им е подадено друго.
 началноКраче = 14 # BOARD: 8 = BCM: 14
 крайноКраче = 15 # BOARD: 10 = BCM: 15
 крачеЖица = 18 # BOARD: 12 = BCM: 18
@@ -13,6 +14,20 @@ from gpiozero import LED    # sudo apt install python3-gpiozero
 червенСветодиод = LED(27) # BOARD: 13 = BCM: 27
 сирена = 22 # BOARD: 15 = BCM: 22
 секундиПаузаПриНаказание = 0.2
+
+def бип(секунди = 0.05):
+    GPIO.output(сирена, True)
+    time.sleep(секунди)
+    GPIO.output(сирена, False)
+
+def покажиНаказание(секунди):
+    зеленСветодиод.off()
+    червенСветодиод.on()
+    GPIO.output(сирена, True)
+    time.sleep(секунди)
+    червенСветодиод.off()
+    зеленСветодиод.on()
+    GPIO.output(сирена, False)
 
 # Схема на крачетата http://raspi.tv/wp-content/uploads/2014/07/Raspberry-Pi-GPIO-pinouts.png
 GPIO.setmode(GPIO.BCM)
@@ -26,8 +41,9 @@ print("Здравейте, мили ученици!")
 while True:
         print("Докоснете точка „Начало“")
         while not GPIO.input(началноКраче):
-                time.sleep(0.8)
+                time.sleep(0.01)
 
+        бип()
         зеленСветодиод.on()
         print("А сега докоснете точка „Край“, без да докосвате жицата")
         наказателниТочки = 0
@@ -37,15 +53,10 @@ while True:
                 if GPIO.input(крачеЖица):
                         наказателниТочки = наказателниТочки + 1
                         print("Наказателни точки", наказателниТочки)
-                        зеленСветодиод.off()
-                        червенСветодиод.on()
-                        GPIO.output(сирена, True)
-                        time.sleep(секундиПаузаПриНаказание)
-                        червенСветодиод.off()
-                        зеленСветодиод.on()
-                        GPIO.output(сирена, False)
+                        покажиНаказание(секундиПаузаПриНаказание)
+                        
         score = time.clock() - началноВреме + (наказателниТочки * секундиПаузаПриНаказание)
         print("Изминало време", score, "секунди.", наказателниТочки, " наказателни точки")
+        бип()
         зеленСветодиод.off()
 GPIO.cleanup()
-
