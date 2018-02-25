@@ -24,7 +24,7 @@ public class SteadyHands
    public static void main(String[] args) throws Exception {
 
      Pin  startPin = RaspiPin.GPIO_08;
-     Pin  endPin   = RaspiPin.GPIO_10;
+     Pin  endPin   = RaspiPin.GPIO_16;
      Pin  wirePin  = RaspiPin.GPIO_12;
      GpioPinDigitalInput start = null;
      GpioPinDigitalInput end   = null;

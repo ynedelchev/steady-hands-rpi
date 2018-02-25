@@ -3,6 +3,10 @@
 #include <time.h>
 #include <pigpio.h>
 
+/* ALL GPIO are identified by their Broadcom number. See: http://abyz.me.uk/rpi/pigpio/
+ */
+
+
 /* 
  * Моля изпълнете: 
  *     sudo apt-get install codeblocks vim gcc pigpio make
@@ -12,17 +16,20 @@
  * или просто стартирайте развойната среда Code Blocks и отворете проектния файл `steady-hands.cbp`.
  *
  * Схема на крачетата: https://www.raspberrypi.org/documentation/usage/gpio/images/a-and-b-physical-pin-numbers.png
- * Забележка: Крачета 3 и 5 винаги отчитат напрежение (1), когато се използват като входни (IN).
+ * Забележка: Крачета 3 и 5 (физически)  винаги отчитат напрежение (1), когато се използват като входни (IN).
  */
-int main(int argc, char* argv[])//           startPin endPin  wirePin
-{                               //                  |    |    |
-  int  startPin       =  8;     //   +--------------V----V----V--------------------------------------... . . 
-  int  endPin         = 10;     //   | (2) (4) (6) (8) (10) (12) (14) (16) (18) (20) (22) (24) (26)
-  int  wirePin        = 12;     //   | (1) (3) (5) (7) ( 9) (11) (13) (15) (17) (19) (21) (23) (25)
-  int  secsPunishment =  1;     //   |
-  int  numFailures    =  0;     //   |    R a s p b e r r y   P i   b o a r d
-  long startTime      =  0;     //   .
-  int  score          =  0;     //   . . .  .  .  .   .   .   .    .    .    .     .     .     .
+                                //           startPin         wirePin   endPin
+				//                  |         |         |
+int main(int argc, char* argv[])//                  V         V         V
+{                               //     5V  5V  GR  14   15   18   -    23   24   -    25    8    7     -- Broadcom Numbering Scheme (BCN)
+  int  startPin       = 14;     //   +--------------V----V----V--------------------------------------... . . 
+  int  endPin         = 23;     //   | (2) (4) (6) (8) (10) (12) (14) (16) (18) (20) (22) (24) (26)    -- Phisical Board
+  int  wirePin        = 18;     //   | (1) (3) (5) (7) ( 9) (11) (13) (15) (17) (19) (21) (23) (25)    -- Numbering Scheme
+  int  secsPunishment =  1;     //   | 3v   2   3   4   GR   17   27   22    ^    10    9   11   -      -- Broadcom Numbering Scheme (BCN)
+  int  numFailures    =  0;     //   |                                       |
+  long startTime      =  0;     //   . R a s p b e r r y   P i   b o a r d   |
+  int  score          =  0;     //   .                                       ringPin 
+                                //   . . .  .  .  .   .   .   .    .    .    .     .     .     .
   
 
   if (gpioInitialise() < 0) {
@@ -54,7 +61,7 @@ int main(int argc, char* argv[])//           startPin endPin  wirePin
         sleep(secsPunishment);
       }
     }
-    score = clock() - startTime + (numFailures * secsPunishment);
+    score = ( clock() - startTime + (numFailures * secsPunishment) )  / CLOCKS_PER_SEC;
     printf("Изминало време %d секунди. %d наказателни точки\n", score, numFailures);
   }
   gpioTerminate();
