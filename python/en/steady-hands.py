@@ -45,11 +45,11 @@ GPIO.setup(wirePin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 print("Hi Dear Students")
 
 while True:
-        print("Please touch the stratPin with the ring.")
+        print("Please touch the startPin with the ring.")
         while not GPIO.input(startPin):
                 time.sleep(0.8)
 
-        print("Touch the endPin with the ring without touching the bend wire. ")
+        print("Touch the endPin with the ring without touching the bent wire. ")
         numFailures = 0
         startTime = time.clock()
 
