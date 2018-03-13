@@ -1,4 +1,10 @@
-package pi.gpio.steadyhands;
+/**
+    wget http://get.pi4j.com/download/pi4j-1.2-SNAPSHOT.deb
+    dpkg -i pi4j-1.2-SNAPSHOT.deb
+    javac -classpath .:classes:/opt/pi4j/lib/'*' -d . SteadyHands.java
+    java -classpath .:classes:/opt/pi4j/lib/'*' SteadyHands
+*/
+
 
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinMode;
@@ -11,21 +17,14 @@ import com.pi4j.io.gpio.GpioPinDigitalInput;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 
 /**
- * Схема на крачетата: https://www.raspberrypi.org/documentation/usage/gpio/images/a-and-b-physical-pin-numbers.png
- * Забележка: Крачета 3 и 5 винаги отчитат напрежение (1), когато се използват като входни (IN).
- * 
- * Write a description of class SteadyHands here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Scheme: https://www.raspberrypi.org/documentation/usage/gpio/images/a-and-b-physical-pin-numbers.png
  */
-public class SteadyHands
-{
+public class SteadyHands {
    public static void main(String[] args) throws Exception {
 
-     Pin  startPin = RaspiPin.GPIO_08;
+     Pin  startPin = RaspiPin.GPIO_15;
      Pin  endPin   = RaspiPin.GPIO_16;
-     Pin  wirePin  = RaspiPin.GPIO_12;
+     Pin  wirePin  = RaspiPin.GPIO_01;
      GpioPinDigitalInput start = null;
      GpioPinDigitalInput end   = null;
      GpioPinDigitalInput wire  = null;
@@ -44,28 +43,28 @@ public class SteadyHands
      gpio.setMode(PinMode.DIGITAL_INPUT, end);
      gpio.setMode(PinMode.DIGITAL_INPUT, wire);
 
-     System.out.println("Здравейте, мили ученици!");
+     System.out.println("Hi!");
 
        while (true) {
-         System.out.println("Докоснете точка „Начало“");
+         System.out.println("Touch Start");
          while (start.isLow()) {
            Thread.sleep(800);
          }
 
-         System.out.println("А сега докоснете точка „Край“, без да докосвате жицата");
+         System.out.println("Touch End");
          numFailures = 0;
          long startTime = System.currentTimeMillis();
 
          while (! end.isLow()) {
                 if (wire.isHigh()) {
                   numFailures = numFailures + 1;
-                  System.out.println("Наказателни точки" + numFailures);
+                  System.out.println("Failures" + numFailures);
                   Thread.sleep(punishmentMillis);
                 }
 	 }
          long score = System.currentTimeMillis() - startTime + (numFailures * punishmentMillis);
          score = score / 1000;
-         System.out.println("Изминало време " + score + " секунди. " + numFailures + " наказателни точки");
+         System.out.println("Time " + score + " seconds. " + numFailures + " failures");
         
       }
       // release the GPIO controller resources
