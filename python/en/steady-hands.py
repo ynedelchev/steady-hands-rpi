@@ -37,9 +37,11 @@
 import RPi.GPIO as GPIO
 import time
 
-startPin      = 14
-endPin        = 23
-wirePin       = 18
+# Pins
+startPin      = 14      # BCM GPIO14 = BOARD pin 8
+endPin        = 23      # BCM GPIO23 = BOARD pin 16
+wirePin       = 18      # BCM GPIO18 = BOARD pin 12
+
 secondsPunishment = 0.2
 
 GPIO.setmode(GPIO.BCM)
