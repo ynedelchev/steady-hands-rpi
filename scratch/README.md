@@ -53,9 +53,9 @@ We would use
  1. Open a console terminal window:
    ![Open Termina](images/1-open-terminal.png "Open Terminal")
    
- 2. Clone the project from [https://github.com/ynedelchev/steady-hands/](https://github.com/ynedelchev/steady-hands/) using the command: 
+ 2. Clone the project from [https://github.com/ynedelchev/steady-hands-rpi/](https://github.com/ynedelchev/steady-hands-rpi/) using the command: 
    ```
-   git clone https://github.com/ynedelchev/steady-hands/
+   git clone https://github.com/ynedelchev/steady-hands-rpi/
    ```
    ![Clone Project](images/2-git-clone.png "Clone Project from GitHub")
    
@@ -131,4 +131,8 @@ We would use
  3. Adjust all the settings as per your preferences. In the below screenshot there are some sample settings: 
    
    ![Keyboard settings](images/k3-settings.png "Keyboard settings")
+   
+   The keyboard indicator will appear in the task panel on the top:
+   
+   ![Keyboard indicator](images/k4-switch.png "Switching keyboard layouts")
    
