@@ -30,7 +30,7 @@
 			"objName": "Cat1",
 			"variables": [{
 					"name": "наказателни",
-					"value": 0,
+					"value": 32,
 					"isPersistent": false
 				},
 				{
@@ -45,7 +45,7 @@
 				},
 				{
 					"name": "време",
-					"value": 258.245,
+					"value": 61,
 					"isPersistent": false
 				}],
 			"scripts": [[5,
@@ -63,18 +63,18 @@
 						["say:duration:elapsed:from:", "Здравейте, мили ученци!", 4],
 						["doForever",
 							[["say:", "Докоснете точката за начало!"],
-								["doUntil",
-									["not", ["Pi GPIO\u001fget_gpio", ["readVariable", "начало"]]],
-									[["wait:elapsed:from:", 1], ["setVar:to:", "време", ["timer"]], ["setVar:to:", "наказателни", 0]]],
+								["doWaitUntil", ["not", ["Pi GPIO\u001fget_gpio", ["readVariable", "начало"]]]],
+								["setVar:to:", "време", ["timer"]],
+								["setVar:to:", "наказателни", 0],
 								["say:", "А сега докоснете точката край без да докосвате жицата!"],
 								["doUntil",
 									["not", ["Pi GPIO\u001fget_gpio", ["readVariable", "край"]]],
 									[["doIf",
 											["not", ["Pi GPIO\u001fget_gpio", ["readVariable", "жица"]]],
 											[["changeVar:by:", "наказателни", 1],
-												["say:duration:elapsed:from:", ["concatenate:with:", "Докоснахте жицата. Наказателни точки: ", ["readVariable", "наказателни"]], 3],
 												["playSound:", "meow"],
-												["say:", "Моля продължете по-внимателно!"]]]]],
+												["say:", ["concatenate:with:", ["concatenate:with:", "Докоснахте жицата. Наказателни точки: ", ["readVariable", "наказателни"]], "  Моля продължете по-внимателно!"]],
+												["doWaitUntil", ["Pi GPIO\u001fget_gpio", ["readVariable", "жица"]]]]]]],
 								["setVar:to:", "време", ["rounded", ["-", ["timer"], ["readVariable", "време"]]]],
 								["say:duration:elapsed:from:",
 									["concatenate:with:",
@@ -107,7 +107,7 @@
 				}],
 			"currentCostumeIndex": 0,
 			"scratchX": 0,
-			"scratchY": 2,
+			"scratchY": 2.0000000000000826,
 			"scale": 1,
 			"direction": 90,
 			"rotationStyle": "normal",
@@ -188,7 +188,7 @@
 			"visible": true
 		}],
 	"info": {
-		"swfVersion": "v456",
+		"scriptCount": 1,
 		"userAgent": "Scratch 2.0 Offline Editor",
 		"flashVersion": "LNX 27,0,0,187",
 		"savedExtensions": [{
@@ -200,7 +200,7 @@
 				"javascriptURL": "scratch_extensions\/piGPIOExtension.js",
 				"url": "file:\/\/\/usr\/lib\/scratch2\/scratch_extensions\/gpio.html"
 			}],
-		"scriptCount": 1,
+		"swfVersion": "v456",
 		"spriteCount": 1,
 		"videoOn": false
 	}
