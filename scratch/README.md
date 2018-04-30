@@ -87,7 +87,7 @@ We would use
     
  6. Lets add the module that allows us to work with GPIO. Go to `More Blocks` and then `Add an Extension`.
     
-    ![Add GPIO Extension](images/8-more-blocks-add-extension.png "More Blocks - Add Extension")
+    ![Add GPIO Extension](images/8-more-blocks-add-extensin.png "More Blocks - Add Extension")
     
  7. Select the iconf for the PI GPIO extension and press OK. 
  
@@ -102,33 +102,33 @@ We would use
     ![Load Project](images/11-load-project.png "Loading the project")
     
  9. Select the project file that you have generated in step 4.
- 
+    
     ![Select Project file](images/12-select-the-project.png "Selecting the project file")
     
  10. You will be asked, whether you want to replace the existing project. Answer `OK`.
- 
+    
     ![Replace the existing project](images/13-ask-override.png "Replace the existing project")
     
  11. Review the loaded program
- 
+    
     ![Program](images/14-loaded.png "Program")
     
  12. Run the program by pressing the flag icon. 
- 
+    
     ![Run it](images/15-run-it.png "Run the program")
     
 ### Adjusting the Keyboard
 
  1. On the task bar on the top, click with the right mouse button to open a context menu and then select 
     `Add / Remove Panel Items`.
- 
+    
     ![Add / Remove Panel Items](images/k1-add-remove-panel-items.png "Adjusting Panel Items")
     
  2. In the dialog, scroll down and select `Keyboard Layout Handler`, then click `Preferences`:
- 
+    
     ![Preferences](images/k2-keyboard-layout-handler.png "Preferences")
     
  3. Adjust all the settings as per your preferences. In the below screenshot there are some sample settings: 
- 
+    
     ![Keyboard settings](images/k3-settings.png "Keyboard settings")
     
