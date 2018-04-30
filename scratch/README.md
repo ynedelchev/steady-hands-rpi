@@ -1,6 +1,22 @@
 Steady hands game written in Scratch 2
 =========================================
 
+<!--Please use markdown-toc -i README.md to update the table of contents -->
+<!-- -->
+**Table of Contents**  *generated with [Markdown-TOC](https://www.npmjs.com/package/markdown-toc#install)*
+
+<!-- toc -->
+
+- [Quick Start](#quick-start)
+- [Detailed Instructions](#detailed-instructions)
+  * [Overview of the game](#overview-of-the-game)
+  * [Numbering Schemes](#numbering-schemes)
+  * [Hardware setup](#hardware-setup)
+  * [Steps to generate and load the project](#steps-to-generate-and-load-the-project)
+  * [Adjusting the Keyboard](#adjusting-the-keyboard)
+
+<!-- tocstop -->
+
 Quick Start
 ------------
  * Biuld the project by cd-ing to this directory and running: 
@@ -135,4 +151,3 @@ We would use
    The keyboard indicator will appear in the task panel on the top:
    
    ![Keyboard indicator](images/k4-switch.png "Switching keyboard layouts")
-   
