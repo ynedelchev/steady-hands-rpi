@@ -151,3 +151,43 @@ We would use
    The keyboard indicator will appear in the task panel on the top:
    
    ![Keyboard indicator](images/k4-switch.png "Switching keyboard layouts")
+
+ 4. Since there seem to be some sort of bug in raspberry pi and these settings
+    are not survive a restart, here is what you need to do to make them 
+    permanent. 
+
+    a. Open the following file for editing (use escalated privileges or edit as root):
+       ```
+         sudo vim /etc/default/keyboard
+       ```
+       Instead of `vim`, you can also use `nano` or any other text editor as per your preference.
+
+     b. Edit the file untill it looks like this:
+        ```
+         XKBMODEL="pc105"
+         XKBLAYOUT="us,bg"
+         XKBVARIANT=",phonetic"
+         XKBOPTIONS="grp:lalt_lshift_toggle,compose:ralt,terminate:ctrl_alt_bksp"
+         BACKSPACE="guess"
+        ```
+        Please note that valued `us` and `bg` for the `XKBLAYOUT` are the keyboard layouts for American English and Bulgarian. 
+
+        Then the `,phonetic` in `XKBVARIANT`, represents the sub-variants in a comma separated list, 
+        where we have an empty string for the `us` variant (which probably means the 
+        default variant) and we have `phonetic` for the Bulgarian variant. 
+
+        For Bulgarian, you could also use `bas_phonetic` which would bring you the 
+        new phonetic invented in Bulgarian Academic of Science but not widespread 
+        (versus `phonetic` that gives you the traditional phonetic layout - widespread).
+
+        If you use empty string for the Bulgarian phonetic, then you would get the 
+        typewriter standard also known as BDS (Bulgarian Darzhaven Standard).
+
+        The value `grp:lalt_lshift_toggle` in `XKBOPTIONS` allows you to switch between
+        American English and Bulgarian using the `Letf Alt` + `Left Shift` combination.
+
+     c. Restart 
+        ```
+         sudo reboot
+        ```
+        
